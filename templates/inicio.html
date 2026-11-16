@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arte, fileira, botao_lista with context %}
+{% block classe %}com-hero{% endblock %}
+{% block conteudo %}
+{% if heroi %}
+<section class="hero">
+  {% call arte(heroi, True) %}{% endcall %}
+  <div class="hero-conteudo">
+    <p class="selo">{{ tipo_label(heroi.tipo) }} em destaque</p>
+    <h1>{{ heroi.titulo }}</h1>
+    <p class="info">
+      <span class="classif">{{ heroi.classificacao }}</span>
+      <span>{{ heroi.ano }}</span><span>{{ heroi.duracao_min|duracao }}</span><span>{{ heroi.genero }}</span>
+    </p>
+    <p class="sinopse">{{ heroi.sinopse }}</p>
+    <div class="acoes">
+      <a class="btn grande" href="{{ url_for('assistir', titulo_id=heroi.id) }}" data-nav>Assistir</a>
+      {{ botao_lista(heroi, heroi_lista, '/') }}
+      <a class="btn ghost" href="{{ url_for('titulo', titulo_id=heroi.id) }}" data-nav>Mais informações</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<div class="faixas">
+  {{ fileira('Para assistir agora', disponiveis) }}
+  {{ fileira('Continuar assistindo', continuar, largo=True, progresso=True) }}
+  {{ fileira('Minha lista', minha_lista) }}
+  {% for chave, nome, itens in secoes %}
+    {{ fileira(nome, itens, link=url_for('biblioteca', tipo=chave)) }}
+  {% endfor %}
+</div>
+{% endblock %}

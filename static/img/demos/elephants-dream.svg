@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-labelledby="title">
+  <title id="title">Elephants Dream — Teaser</title>
+  <defs>
+    <linearGradient id="bg" x2="0.8" y2="1"><stop stop-color="#88624c"/><stop offset="1" stop-color="#111b24"/></linearGradient>
+    <radialGradient id="core"><stop stop-color="#f8d6a1"/><stop offset="1" stop-color="#a47756"/></radialGradient>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h900v1200H0z"/>
+  <g fill="none" stroke="#b39b80" opacity=".22" stroke-width="30">
+    <path d="M-50 280h300v300h500v-180h200M-50 640h210v330h400v260M950 150H550v170"/>
+    <circle cx="450" cy="520" r="208"/>
+  </g>
+  <g transform="translate(450 520)" stroke="#cfaf86" fill="none">
+    <circle r="158" stroke-width="37" stroke-dasharray="22 16"/>
+    <circle r="110" stroke-width="7"/>
+    <path d="M-110 0h220M0-110v220m-78-188 156 156m-156 0L78-78" stroke-width="12"/>
+  </g>
+  <circle cx="450" cy="520" r="45" fill="url(#core)"/>
+  <g fill="#fff" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif">
+    <text x="450" y="780" font-size="25" letter-spacing="8">TEASER</text>
+    <text x="450" y="849" font-size="54" font-weight="700">ELEPHANTS DREAM</text>
+    <text x="450" y="1100" font-size="22" letter-spacing="4" opacity=".7">VISIONBOX · 2006</text>
+  </g>
+</svg>

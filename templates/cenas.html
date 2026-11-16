@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block titulo %}Cenas de luz | VisionBox{% endblock %}
+{% block conteudo %}
+<div class="pagina">
+  <h1>Cenas de luz</h1>
+  <p class="lead">A cena define a cor da luz ao redor da tela. Combine com a iluminação da sua sala antes de começar.</p>
+  <div class="cenas">
+    {% for c in cenas %}
+    <form class="cena{{ ' ativa' if usuario.cena_id == c.id }}" method="post" action="{{ url_for('usar_cena', cena_id=c.id) }}" style="--cor:{{ c.cor_hex }}">
+      <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+      <div class="preview" aria-hidden="true"><i></i></div>
+      <h2>{{ c.nome }}</h2>
+      <p>{{ c.descricao }}</p>
+      {% if usuario.cena_id == c.id %}
+        <span class="em-uso">Em uso</span>
+      {% else %}
+        <button class="btn ghost" data-nav>Usar esta cena</button>
+      {% endif %}
+    </form>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

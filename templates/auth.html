@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Entrar' if modo == 'entrar' else 'Criar conta' }} | VisionBox{% endblock %}
+{% block classe %}pagina-auth{% endblock %}
+{% block conteudo %}
+<section class="auth">
+  <div class="auth-form">
+    <h1>{{ 'Entrar' if modo == 'entrar' else 'Criar conta' }}</h1>
+    <form method="post" class="form">
+      <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+      {% if modo == 'registrar' %}
+      <label>Nome <input name="nome" required maxlength="80" autocomplete="name"></label>
+      {% endif %}
+      <label>E-mail <input type="email" name="email" required autocomplete="email"></label>
+      <label>Senha <input type="password" name="senha" required minlength="{{ 8 if modo == 'registrar' else 1 }}"
+             autocomplete="{{ 'new-password' if modo == 'registrar' else 'current-password' }}"></label>
+      <button class="btn grande">{{ 'Entrar' if modo == 'entrar' else 'Criar conta' }}</button>
+    </form>
+    {% if modo == 'entrar' %}
+      <p class="muted">Primeira vez aqui? <a href="{{ url_for('registrar') }}">Crie sua conta</a></p>
+    {% else %}
+      <p class="muted">Já tem conta? <a href="{{ url_for('entrar') }}">Entre</a></p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

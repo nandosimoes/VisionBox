@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_macros.html" import fileira with context %}
+{% block titulo %}Perfil | VisionBox{% endblock %}
+{% block conteudo %}
+<div class="pagina">
+  <div class="perfil-topo">
+    <span class="avatar" aria-hidden="true">{{ usuario.nome[:1]|upper }}</span>
+    <div>
+      <h1>{{ usuario.nome }}</h1>
+      <p class="muted">{{ usuario.email }}</p>
+    </div>
+  </div>
+  <dl class="numeros">
+    <div><dd>{{ stats.sessoes }}</dd><dt>{{ 'sessão' if stats.sessoes == 1 else 'sessões' }}</dt></div>
+    <div><dd>{{ stats.titulos }}</dd><dt>{{ 'título assistido' if stats.titulos == 1 else 'títulos assistidos' }}</dt></div>
+    <div><dd>{{ stats.minutos }}</dd><dt>minutos na tela</dt></div>
+  </dl>
+</div>
+<div class="faixas">
+  {{ fileira('Minha lista', lista) }}
+  {% if not lista %}<p class="vazio recuo">Sua lista está vazia. Abra um título e escolha Minha lista.</p>{% endif %}
+</div>
+<div class="pagina">
+  <h2>Últimas sessões</h2>
+  {% if recentes %}
+  <ul class="hist">
+    {% for h in recentes %}
+    <li><a href="{{ url_for('titulo', titulo_id=h.titulo_id) }}" data-nav>{{ h.titulo }}</a>
+      <span class="muted">{{ tipo_label(h.tipo) }}, {{ h.iniciada_em.strftime('%d/%m/%Y às %H:%M') }}</span></li>
+    {% endfor %}
+  </ul>
+  {% else %}<p class="vazio">Nenhuma sessão ainda. Escolha um título e aperte Assistir.</p>{% endif %}
+  <form method="post" action="{{ url_for('sair') }}" class="sair">
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+    <button class="btn ghost" data-nav>Sair da conta</button>
+  </form>
+</div>
+{% endblock %}

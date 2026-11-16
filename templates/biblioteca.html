@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "_macros.html" import card with context %}
+{% block titulo %}Biblioteca | VisionBox{% endblock %}
+{% block conteudo %}
+<div class="pagina">
+  <h1>Biblioteca</h1>
+  <form class="busca" method="get">
+    {% if tipo %}<input type="hidden" name="tipo" value="{{ tipo }}">{% endif %}
+    <input type="search" name="q" value="{{ busca }}" placeholder="Buscar por título, gênero ou tema" aria-label="Buscar">
+    <button class="btn" data-nav>Buscar</button>
+  </form>
+  <div class="chips">
+    <a class="chip{{ ' on' if not tipo }}" href="{{ url_for('biblioteca', q=busca or None) }}" data-nav>Todos</a>
+    {% for chave, nome in TIPOS.items() %}
+    <a class="chip{{ ' on' if tipo == chave }}" href="{{ url_for('biblioteca', tipo=chave, q=busca or None) }}" data-nav>{{ nome }}</a>
+    {% endfor %}
+  </div>
+  {% if titulos %}
+  <p class="muted">{{ titulos|length }} {{ 'título' if titulos|length == 1 else 'títulos' }}</p>
+  <div class="grade">{% for t in titulos %}{{ card(t) }}{% endfor %}</div>
+  {% else %}
+  <p class="vazio">Nenhum título encontrado. Limpe a busca ou escolha outra categoria.</p>
+  {% endif %}
+</div>
+{% endblock %}

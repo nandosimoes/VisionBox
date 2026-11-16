@@ -1,0 +1,36 @@
+{% macro arte(t, banner=False) %}
+{%- set src = (t.banner_url if banner else t.capa_url) or url_for('static', filename='img/capa-nao-encontrada.svg') -%}
+<span class="arte" style="--c1:{{ t.cor1 }};--c2:{{ t.cor2 }}">
+  {%- if src %}<img src="{{ src }}" alt="" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/capa-nao-encontrada.svg') }}'">{% endif -%}
+  {{ caller() if caller else '' }}
+</span>
+{% endmacro %}
+
+{% macro card(t, pct=None, largo=False) %}
+<a class="card{{ ' largo' if largo }}" href="{{ url_for('titulo', titulo_id=t.id) }}" data-nav>
+  {% call arte(t, largo) %}
+    <span class="tag">{{ tipo_label(t.tipo) }}</span>
+    {% if pct %}<span class="bar"><i style="width:{{ pct }}%"></i></span>{% endif %}
+  {% endcall %}
+  <span class="meta"><strong>{{ t.titulo }}</strong><small>{{ t.ano }}, {{ t.genero }}</small></span>
+</a>
+{% endmacro %}
+
+{% macro fileira(titulo, itens, link=None, largo=True, progresso=False) %}
+{% if itens %}
+<section class="fileira">
+  <header><h2>{{ titulo }}</h2>{% if link %}<a class="ver-tudo" href="{{ link }}" data-nav>Ver tudo</a>{% endif %}</header>
+  <div class="trilho">
+    {% for t in itens %}{{ card(t, t.pct if progresso else None, largo) }}{% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endmacro %}
+
+{% macro botao_lista(t, ativo, voltar='') %}
+<form method="post" action="{{ url_for('lista', titulo_id=t.id) }}">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <input type="hidden" name="next" value="{{ voltar }}">
+  <button class="btn ghost" data-nav>{{ 'Remover da lista' if ativo else 'Minha lista' }}</button>
+</form>
+{% endmacro %}

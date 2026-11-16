@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR" data-tema="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ t.titulo }} | VisionBox</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/logo-tv.svg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tv.css') }}">
+</head>
+<body class="pagina-player">
+  <div class="player" id="player"
+       data-salvar="{{ url_for('salvar_progresso', titulo_id=t.id) }}"
+       data-csrf="{{ csrf_token }}" data-retomar="{{ retomar }}"
+       data-voltar="{{ url_for('titulo', titulo_id=t.id) }}">
+    <div class="player-topo">
+      <a class="btn ghost" id="voltar" href="{{ url_for('titulo', titulo_id=t.id) }}">Voltar</a>
+      <div><strong>{{ t.titulo }}</strong>{% if demo %}<small>Vídeo de demonstração</small>{% endif %}</div>
+    </div>
+    <div class="moldura">
+      <video id="video" src="{{ fonte }}" controls autoplay playsinline preload="metadata"></video>
+    </div>
+    <div class="player-erro" id="erro" hidden>
+      <h2>Não foi possível carregar o vídeo</h2>
+      <p>Não conseguimos abrir este vídeo. Volte ao título e tente novamente.</p>
+      <a class="btn" href="{{ url_for('titulo', titulo_id=t.id) }}">Voltar ao título</a>
+    </div>
+    <div class="player-fim" id="fim" hidden>
+      <h2>Fim da sessão</h2>
+      <div class="acoes">
+        <a class="btn grande" href="{{ url_for('assistir', titulo_id=t.id, recomecar=1) }}">Assistir de novo</a>
+        <a class="btn ghost" href="{{ url_for('inicio') }}">Ir para o início</a>
+      </div>
+    </div>
+    <p class="player-dica">Espaço pausa. Setas avançam e voltam 10 s. F tela cheia. M som. Esc volta.</p>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

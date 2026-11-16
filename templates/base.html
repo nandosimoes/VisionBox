@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR" data-tema="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}VisionBox{% endblock %}</title>
+  <script>try{var t=localStorage.getItem("tema");if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
+  <meta name="theme-color" content="#101012">
+  <link rel="icon" href="{{ url_for('static', filename='img/logo-tv.svg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tv.css') }}">
+</head>
+<body class="{% block classe %}{% endblock %}">
+  <header class="topo">
+    <a class="marca" href="{{ url_for('inicio') }}">
+      <img src="{{ url_for('static', filename='img/logo-tv.svg') }}" alt="" width="36" height="36">
+      <span>VisionBox</span>
+    </a>
+    {% if usuario %}
+    <nav class="abas" aria-label="Principal">
+      {% set ep = request.endpoint %}
+      <a href="{{ url_for('inicio') }}" data-nav {% if ep == 'inicio' %}aria-current="page"{% endif %}>Início</a>
+      <a href="{{ url_for('biblioteca') }}" data-nav {% if ep in ('biblioteca','titulo') %}aria-current="page"{% endif %}>Biblioteca</a>
+      <a href="{{ url_for('perfil') }}" data-nav {% if ep == 'perfil' %}aria-current="page"{% endif %}>Perfil</a>
+      {% if usuario.is_admin %}<a href="{{ url_for('admin_painel') }}" data-nav {% if ep == 'admin_painel' %}aria-current="page"{% endif %}>Admin</a>{% endif %}
+    </nav>
+    {% endif %}
+    <div class="ferramentas">
+      <button class="botao-topo" type="button" data-tema-alternar data-nav aria-label="Alternar entre modo claro e escuro">Modo claro</button>
+      {% if usuario %}<button class="botao-topo tela-cheia" type="button" data-tela-cheia data-nav aria-label="Alternar tela cheia">Tela cheia</button><form method="post" action="{{ url_for('sair') }}"><input type="hidden" name="_csrf" value="{{ csrf_token }}"><button class="botao-topo" type="submit">Sair</button></form>{% endif %}
+    </div>
+  </header>
+  <main>
+    {% with msgs = get_flashed_messages(with_categories=true) %}
+      {% if msgs %}<div class="avisos" role="status">
+        {% for cat, m in msgs %}<p class="aviso {{ cat }}">{{ m }}</p>{% endfor %}
+      </div>{% endif %}
+    {% endwith %}
+    {% block conteudo %}{% endblock %}
+  </main>
+  {% if usuario %}
+  <footer class="rodape">
+    <span>Use as setas e Enter para navegar. Tecla F alterna a tela cheia.</span>
+  </footer>
+  {% endif %}
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

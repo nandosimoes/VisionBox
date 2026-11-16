@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-labelledby="title">
+  <title id="title">Big Buck Bunny — Trailer</title>
+  <defs>
+    <linearGradient id="bg" x2="0.8" y2="1"><stop stop-color="#66896a"/><stop offset="1" stop-color="#102b2c"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#d4e8ac" stop-opacity=".55"/><stop offset="1" stop-color="#d4e8ac" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h900v1200H0z"/>
+  <circle cx="450" cy="490" r="440" fill="url(#glow)"/>
+  <path d="M0 860Q180 650 400 870T900 770V1200H0z" fill="#142f29" opacity=".65"/>
+  <g fill="#f2ead8">
+    <ellipse cx="385" cy="430" rx="45" ry="140" transform="rotate(-13 385 430)"/>
+    <ellipse cx="515" cy="430" rx="45" ry="140" transform="rotate(13 515 430)"/>
+    <ellipse cx="450" cy="596" rx="145" ry="130"/>
+  </g>
+  <g fill="#ae9292"><ellipse cx="385" cy="430" rx="21" ry="103" transform="rotate(-13 385 430)"/><ellipse cx="515" cy="430" rx="21" ry="103" transform="rotate(13 515 430)"/></g>
+  <g fill="#283933"><circle cx="403" cy="578" r="9"/><circle cx="497" cy="578" r="9"/></g>
+  <path d="m435 611 15 15 15-15z" fill="#ae9292"/>
+  <g fill="#fff" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif">
+    <text x="450" y="780" font-size="25" letter-spacing="8">TRAILER</text>
+    <text x="450" y="849" font-size="55" font-weight="700">BIG BUCK BUNNY</text>
+    <text x="450" y="1100" font-size="22" letter-spacing="4" opacity=".7">VISIONBOX · 2008</text>
+  </g>
+</svg>

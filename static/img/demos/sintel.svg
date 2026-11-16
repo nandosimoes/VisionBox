@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-labelledby="title">
+  <title id="title">Sintel — Trailer</title>
+  <defs>
+    <linearGradient id="bg" x2="0.3" y2="1"><stop stop-color="#775576"/><stop offset="1" stop-color="#131d32"/></linearGradient>
+    <linearGradient id="mountain" x2="0.7" y2="1"><stop stop-color="#c4b2c8"/><stop offset="1" stop-color="#3e4563"/></linearGradient>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h900v1200H0z"/>
+  <circle cx="610" cy="338" r="100" fill="#e8ccd6" opacity=".6"/>
+  <path d="M0 738 318 330 595 738 747 483 900 738V1200H0z" fill="url(#mountain)"/>
+  <path d="m318 330 104 154-95-41-64 53z" fill="#f2e9f0" opacity=".85"/>
+  <path d="M0 870 237 647 430 842 610 682 900 907V1200H0z" fill="#1e263e"/>
+  <path d="m290 560 99-51 57 26 68-47 92 62-99-17-56 38-69-34z" fill="#181f33"/>
+  <g fill="#fff" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif">
+    <text x="450" y="780" font-size="25" letter-spacing="8">TRAILER</text>
+    <text x="450" y="849" font-size="76" font-weight="700" letter-spacing="12">SINTEL</text>
+    <text x="450" y="1100" font-size="22" letter-spacing="4" opacity=".7">VISIONBOX · 2010</text>
+  </g>
+</svg>

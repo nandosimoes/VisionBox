@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block titulo %}Administração | VisionBox{% endblock %}
+{% block classe %}pagina-auth{% endblock %}
+{% block conteudo %}
+<section class="auth"><div class="auth-form"><h1>Acesso administrativo</h1><p class="muted">Entre com uma conta que tenha permissão de administrador.</p><form method="post" class="form"><input type="hidden" name="_csrf" value="{{ csrf_token }}"><label>E-mail <input type="email" name="email" required autocomplete="username"></label><label>Senha <input type="password" name="senha" required autocomplete="current-password"></label><button class="btn grande">Entrar no painel</button></form><p class="muted"><a href="{{ url_for('entrar') }}">Voltar ao acesso de usuário</a></p></div></section>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arte, fileira, botao_lista with context %}
+{% block titulo %}{{ t.titulo }} | VisionBox{% endblock %}
+{% block classe %}com-hero{% endblock %}
+{% block conteudo %}
+<section class="hero">
+  {% call arte(t, True) %}{% endcall %}
+  <div class="hero-conteudo">
+    <p class="selo">{{ tipo_label(t.tipo) }}</p>
+    <h1>{{ t.titulo }}</h1>
+    <p class="info">
+      <span class="classif">{{ t.classificacao }}</span>
+      <span>{{ t.ano }}</span><span>{{ t.duracao_min|duracao }}</span><span>{{ t.genero }}</span>
+    </p>
+    <p class="sinopse">{{ t.sinopse }}</p>
+    <div class="acoes">
+      {% if prog %}
+        <a class="btn grande" href="{{ url_for('assistir', titulo_id=t.id) }}" data-nav>Retomar de {{ prog.segundo_atual // 60 }}:{{ '%02d'|format(prog.segundo_atual % 60) }}</a>
+        <a class="btn ghost" href="{{ url_for('assistir', titulo_id=t.id, recomecar=1) }}" data-nav>Do início</a>
+      {% else %}
+        <a class="btn grande" href="{{ url_for('assistir', titulo_id=t.id) }}" data-nav>Assistir</a>
+      {% endif %}
+      {{ botao_lista(t, na_lista, request.path) }}
+    </div>
+    {% if not t.video_url %}<p class="muted pequeno">Este título usa o vídeo de demonstração, pois ainda não tem arquivo próprio.</p>{% endif %}
+    {% if creditos %}
+    <p class="muted pequeno">
+      {{ creditos.autoria }} · <a href="{{ creditos.licenca_url }}" target="_blank" rel="noopener noreferrer">{{ creditos.licenca }}</a><br>
+      <a href="{{ creditos.fonte }}" target="_blank" rel="noopener noreferrer">Créditos e projeto original</a> · Trailer em áudio original. NR: classificação não informada.
+    </p>
+    {% endif %}
+  </div>
+</section>
+<div class="faixas">
+  {{ fileira('Mais como este', parecidos) }}
+</div>
+{% endblock %}
